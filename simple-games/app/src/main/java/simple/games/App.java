@@ -9,7 +9,7 @@ import simple.games.services.HitAndBlow;
 public class App {
     public static void main(String[] args) {
 
-        Game game = new HitAndBlow(10);
+        Game game = new HitAndBlow(1);
 
         game.play();
     }
