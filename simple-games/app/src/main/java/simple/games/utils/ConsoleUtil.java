@@ -1,6 +1,9 @@
 package simple.games.utils;
 
+import java.util.Optional;
 import java.util.Scanner;
+
+import simple.games.enums.YesNoResponse;
 
 public class ConsoleUtil {
     private static final Scanner scanner = new Scanner(System.in);
@@ -31,17 +34,27 @@ public class ConsoleUtil {
         }
     }
 
-    public static String requireYesNoResponse(String question) {
+    public static YesNoResponse requireYesNoResponse(String question) {
         String userInput;
         do {
-            ConsoleUtil.print("%s (yes/no)".formatted(question), true);
+            ConsoleUtil.print(
+                    "%s (%s/%s)".formatted(question, YesNoResponse.YES.toString(), YesNoResponse.NO.toString()), true);
             userInput = ConsoleUtil.readInput("Your choice: ", false);
 
             if (!ValidatorUtil.isValidYesNoResponse(userInput)) {
-                ConsoleUtil.print("Invalid response. Please enter 'yes' or 'no'.", true);
+                ConsoleUtil.print(
+                        "Invalid response. Please enter '%s' or '%s'.".formatted(YesNoResponse.YES.toString(),
+                                YesNoResponse.NO.toString()),
+                        true);
             }
         } while (!ValidatorUtil.isValidYesNoResponse(userInput));
 
-        return userInput;
+        Optional<YesNoResponse> response = YesNoResponse.fromString(userInput);
+
+        if (response.isEmpty()) {
+            throw new RuntimeException("mystery error");
+        }
+
+        return response.get();
     }
 }

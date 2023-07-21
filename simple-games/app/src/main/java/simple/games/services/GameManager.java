@@ -9,6 +9,7 @@ import org.reflections.Reflections;
 
 import lombok.Data;
 import simple.games.annotations.GameImpl;
+import simple.games.enums.YesNoResponse;
 import simple.games.utils.ConsoleUtil;
 import simple.games.utils.ValidatorUtil;
 
@@ -28,28 +29,28 @@ public class GameManager {
     }
 
     public void startGame() {
-        String userInput;
+        YesNoResponse response;
 
         do {
             this.currentGame = this.chooseGame();
             playAndRepeat();
 
-            userInput = ConsoleUtil.requireYesNoResponse("Would you like to play a different game?");
-        } while (userInput.equalsIgnoreCase("yes"));
+            response = ConsoleUtil.requireYesNoResponse("Would you like to play a different game?");
+        } while (response == YesNoResponse.YES);
 
         ConsoleUtil.print("Good bye!!", true);
     }
 
-    public void playAndRepeat() {
-        String userInput;
+    private void playAndRepeat() {
+        YesNoResponse response;
 
         do {
             this.currentGame.initialize();
             this.currentGame.play();
             this.currentGame.end();
 
-            userInput = ConsoleUtil.requireYesNoResponse("Would you like to play again?");
-        } while (userInput.equalsIgnoreCase("yes"));
+            response = ConsoleUtil.requireYesNoResponse("Would you like to play again?");
+        } while (response == YesNoResponse.YES);
     }
 
     private Game chooseGame() {
