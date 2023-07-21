@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public abstract class AbstractGame implements Game{
     protected String gameName;
+    protected String gameDescription;
 }

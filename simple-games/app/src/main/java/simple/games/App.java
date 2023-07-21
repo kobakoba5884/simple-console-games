@@ -3,11 +3,18 @@
  */
 package simple.games;
 
+import simple.games.services.Game;
 import simple.games.services.GameManager;
 
 public class App {
     public static void main(String[] args) {
 
-        new GameManager().chooseGame().play();
+        GameManager gameManager = new GameManager();
+
+        Game currentGame = gameManager.chooseGame();
+
+        currentGame.initialize();
+        currentGame.play();
+        currentGame.end();
     }
 }

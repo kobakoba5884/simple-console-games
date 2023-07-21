@@ -7,11 +7,15 @@ import java.util.stream.IntStream;
 
 import org.reflections.Reflections;
 
+import lombok.Data;
 import simple.games.annotations.GameImpl;
 import simple.games.utils.ConsoleUtil;
+import simple.games.utils.ValidatorUtil;
 
+@Data
 public class GameManager {
     private List<Game> games = new ArrayList<>();
+    private Game currentGame;
 
     public GameManager() {
         this.generateGames();
@@ -38,7 +42,7 @@ public class GameManager {
             ConsoleUtil.print(message, true);
 
             userInput = ConsoleUtil.readIntInput("Enter the number of the game you want to play: ", false);
-        } while (userInput < 1 || userInput > this.games.size());
+        } while (ValidatorUtil.isNotWithinRange(1, this.games.size(), userInput));
 
         Game selectedGame = this.games.get(userInput - 1);
         
