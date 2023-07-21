@@ -6,7 +6,7 @@ GRADLE_VERSION=7.3
 # ---------------------------------- Function to handle errors ----------------------------------
 handle_error() {
     echo "Error: $1" >&2
-    return
+    exit 1
 }
 
 # ---------------------------------- Function to log the start of an operation ----------------------------------
