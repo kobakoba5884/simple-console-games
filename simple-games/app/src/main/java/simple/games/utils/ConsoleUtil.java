@@ -30,4 +30,18 @@ public class ConsoleUtil {
             }
         }
     }
+
+    public static String requireYesNoResponse(String question) {
+        String userInput;
+        do {
+            ConsoleUtil.print("%s (yes/no)".formatted(question), true);
+            userInput = ConsoleUtil.readInput("Your choice: ", false);
+
+            if (!ValidatorUtil.isValidYesNoResponse(userInput)) {
+                ConsoleUtil.print("Invalid response. Please enter 'yes' or 'no'.", true);
+            }
+        } while (!ValidatorUtil.isValidYesNoResponse(userInput));
+
+        return userInput;
+    }
 }

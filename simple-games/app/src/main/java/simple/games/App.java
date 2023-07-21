@@ -3,7 +3,6 @@
  */
 package simple.games;
 
-import simple.games.services.Game;
 import simple.games.services.GameManager;
 
 public class App {
@@ -11,10 +10,6 @@ public class App {
 
         GameManager gameManager = new GameManager();
 
-        Game currentGame = gameManager.chooseGame();
-
-        currentGame.initialize();
-        currentGame.play();
-        currentGame.end();
+        gameManager.startGame();
     }
 }

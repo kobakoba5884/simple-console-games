@@ -27,7 +27,32 @@ public class GameManager {
         }
     }
 
-    public Game chooseGame() {
+    public void startGame() {
+        String userInput;
+
+        do {
+            this.currentGame = this.chooseGame();
+            playAndRepeat();
+
+            userInput = ConsoleUtil.requireYesNoResponse("Would you like to play a different game?");
+        } while (userInput.equalsIgnoreCase("yes"));
+
+        ConsoleUtil.print("Good bye!!", true);
+    }
+
+    public void playAndRepeat() {
+        String userInput;
+
+        do {
+            this.currentGame.initialize();
+            this.currentGame.play();
+            this.currentGame.end();
+
+            userInput = ConsoleUtil.requireYesNoResponse("Would you like to play again?");
+        } while (userInput.equalsIgnoreCase("yes"));
+    }
+
+    private Game chooseGame() {
         ConsoleUtil.print("Available games:", true);
 
         IntStream.range(0, this.games.size())
@@ -36,7 +61,7 @@ public class GameManager {
 
         int userInput;
         String message = this.games.size() == 1 ? "Currently, there is only 1 game available."
-                    : "Please choose a game by entering a number from 1 to %d.".formatted(this.games.size());
+                : "Please choose a game by entering a number from 1 to %d.".formatted(this.games.size());
 
         do {
             ConsoleUtil.print(message, true);
@@ -45,7 +70,7 @@ public class GameManager {
         } while (ValidatorUtil.isNotWithinRange(1, this.games.size(), userInput));
 
         Game selectedGame = this.games.get(userInput - 1);
-        
+
         return selectedGame;
     }
 

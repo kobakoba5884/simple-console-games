@@ -15,4 +15,8 @@ public class ValidatorUtil {
     public static boolean isNotWithinRange(int minNum, int maxNum, int inputNum) {
         return (inputNum < minNum || inputNum > maxNum);
     }
+
+    public static boolean isValidYesNoResponse(String input) {
+        return "yes".equalsIgnoreCase(input) || "no".equalsIgnoreCase(input);
+    }
 }
