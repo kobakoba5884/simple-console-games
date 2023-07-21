@@ -16,6 +16,8 @@ public class HitAndBlow extends AbstractGame implements Game {
     private int maxAttemps;
     private AtomicInteger tryCount;
     private List<Predicate<String>> inputErrorChecks = new ArrayList<>();
+    private int hits;
+    private int blows;
 
     public HitAndBlow(int numDigits) {
         if (numDigits < 1 || numDigits > 10) {
@@ -50,10 +52,17 @@ public class HitAndBlow extends AbstractGame implements Game {
                 continue;
             }
 
+            this.calculateHitsAndBlows(userInput, answers);
+
+            if(this.hits == numDigits){
+                System.out.println("Congratulations! You've got the correct answer.");
+                break;
+            }
+
             tryCount.incrementAndGet();
         }
 
-        if(tryCount.get() >= maxAttemps){
+        if(tryCount.get() >= maxAttemps  && hits != numDigits){
             System.out.println("You've reached the maximum number of attempts. Game over.");
         }
     }
@@ -106,5 +115,22 @@ public class HitAndBlow extends AbstractGame implements Game {
 
     private boolean isValidInput(String userInput){
         return inputErrorChecks.stream().allMatch(check -> check.test(userInput));
+    }
+
+    private void calculateHitsAndBlows(String userInput, List<Integer> answers) {
+        // reset hits and blows
+        this.hits = 0;
+        this.blows = 0;
+
+        IntStream.range(0, numDigits).forEach(i -> {
+            int digit = Character.getNumericValue(userInput.charAt(i));
+            if(answers.get(i) == digit){
+                this.hits++;
+            } else if(answers.contains(digit)){
+                this.blows++;
+            }
+        });
+
+        System.out.println("Hits: %d, Blows: %d".formatted(this.hits, this.blows));
     }
 }
