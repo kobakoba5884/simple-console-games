@@ -3,14 +3,11 @@
  */
 package simple.games;
 
-import simple.games.services.Game;
-import simple.games.services.HitAndBlow;
+import simple.games.services.GameManager;
 
 public class App {
     public static void main(String[] args) {
 
-        Game game = new HitAndBlow(2);
-
-        game.play();
+        new GameManager().chooseGame().play();
     }
 }

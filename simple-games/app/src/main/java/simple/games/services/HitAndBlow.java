@@ -14,7 +14,7 @@ import simple.games.utils.CalculateUtil;
 import simple.games.utils.ConsoleUtil;
 
 @GameImpl
-public class HitAndBlow extends AbstractGame implements Game {
+public class HitAndBlow extends AbstractGame{
     private int numDigits;
     private int maxAttemps;
     private AtomicInteger tryCount;
@@ -31,7 +31,7 @@ public class HitAndBlow extends AbstractGame implements Game {
             throw new IllegalArgumentException("The number of digits must be between 1 and 10.");
         }
 
-        super.setGameName("Hit And Blow");
+        super.gameName = "Hit And Blow";
 
         this.numDigits = numDigits;
         this.maxAttemps = this.calculateMaxTries(10, numDigits);
@@ -48,7 +48,7 @@ public class HitAndBlow extends AbstractGame implements Game {
         List<Integer> answers = this.generateAnswer();
 
         // validating user input
-        while(tryCount.get() < maxAttemps){
+        while(this.tryCount.get() < maxAttemps){
             String userInput = ConsoleUtil.readInput("Enter your guess: ", false);
 
             if(!this.isValidInput(userInput)){
@@ -57,15 +57,15 @@ public class HitAndBlow extends AbstractGame implements Game {
 
             this.calculateHitsAndBlows(userInput, answers);
 
-            if(this.hits == numDigits){
+            if(this.hits == this.numDigits){
                 ConsoleUtil.print("Congratulations! You've got the correct answer.", true);
                 break;
             }
 
-            tryCount.incrementAndGet();
+            this.tryCount.incrementAndGet();
         }
 
-        if(tryCount.get() >= maxAttemps  && hits != numDigits){
+        if(this.tryCount.get() >= this.maxAttemps  && hits != this.numDigits){
             ConsoleUtil.print("You've reached the maximum number of attempts. Game over.", true);
         }
     }
@@ -100,15 +100,15 @@ public class HitAndBlow extends AbstractGame implements Game {
         inputErrorChecks.add(Validator.isNumber);
 
         inputErrorChecks.add(input -> {
-            if(input.length() != numDigits) {
-                ConsoleUtil.print("Invalid input. Please enter exactly %d digits.".formatted(numDigits), true);
+            if(input.length() != this.numDigits) {
+                ConsoleUtil.print("Invalid input. Please enter exactly %d digits.".formatted(this.numDigits), true);
                 return false;
             }
             return true;
         });
 
         inputErrorChecks.add(input -> {
-            if(IntStream.range(0, numDigits - 1).anyMatch(i -> input.indexOf(input.charAt(i)) != input.lastIndexOf(input.charAt(i)))) {
+            if(IntStream.range(0, this.numDigits - 1).anyMatch(i -> input.indexOf(input.charAt(i)) != input.lastIndexOf(input.charAt(i)))) {
                 ConsoleUtil.print("Invalid input. Please do not enter duplicate digits.", true);
                 return false;
             }
@@ -125,7 +125,7 @@ public class HitAndBlow extends AbstractGame implements Game {
         this.hits = 0;
         this.blows = 0;
 
-        IntStream.range(0, numDigits).forEach(i -> {
+        IntStream.range(0, this.numDigits).forEach(i -> {
             int digit = Character.getNumericValue(userInput.charAt(i));
             if(answers.get(i) == digit){
                 this.hits++;
