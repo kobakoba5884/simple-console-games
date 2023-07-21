@@ -8,8 +8,12 @@ import simple.games.services.GameManager;
 public class App {
     public static void main(String[] args) {
 
-        GameManager gameManager = new GameManager();
+        try{
+            GameManager gameManager = new GameManager();
 
-        gameManager.startGame();
+            gameManager.startGame();
+        }catch(Throwable e){
+            e.printStackTrace();
+        }
     }
 }
