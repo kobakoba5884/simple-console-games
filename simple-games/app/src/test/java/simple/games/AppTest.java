@@ -3,9 +3,6 @@
  */
 package simple.games;
 
-import org.junit.jupiter.api.Test;
 
 class AppTest {
-    @Test void test() {
-    }
 }

@@ -8,9 +8,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import simple.games.annotations.GameImpl;
 import simple.games.functions.Validator;
-import simple.games.utils.Calculate;
+import simple.games.utils.CalculateUtil;
+import simple.games.utils.ConsoleUtil;
 
+@GameImpl
 public class HitAndBlow extends AbstractGame implements Game {
     private int numDigits;
     private int maxAttemps;
@@ -19,12 +22,16 @@ public class HitAndBlow extends AbstractGame implements Game {
     private int hits;
     private int blows;
 
+    public HitAndBlow(){
+        this(4);
+    }
+
     public HitAndBlow(int numDigits) {
         if (numDigits < 1 || numDigits > 10) {
             throw new IllegalArgumentException("The number of digits must be between 1 and 10.");
         }
 
-        super.gameName = "Hit And Blow";
+        super.setGameName("Hit And Blow");
 
         this.numDigits = numDigits;
         this.maxAttemps = this.calculateMaxTries(10, numDigits);
@@ -35,18 +42,14 @@ public class HitAndBlow extends AbstractGame implements Game {
     @Override
     public void play() {
 
-        System.out.println("start %s".formatted(super.gameName));
+        ConsoleUtil.print("start %s".formatted(super.gameName), true);
 
         // generating answers
         List<Integer> answers = this.generateAnswer();
 
-        System.out.println(answers);
-
         // validating user input
         while(tryCount.get() < maxAttemps){
-            System.out.print("Enter your guess: ");
-
-            String userInput = super.scanner.nextLine();
+            String userInput = ConsoleUtil.readInput("Enter your guess: ", false);
 
             if(!this.isValidInput(userInput)){
                 continue;
@@ -55,7 +58,7 @@ public class HitAndBlow extends AbstractGame implements Game {
             this.calculateHitsAndBlows(userInput, answers);
 
             if(this.hits == numDigits){
-                System.out.println("Congratulations! You've got the correct answer.");
+                ConsoleUtil.print("Congratulations! You've got the correct answer.", true);
                 break;
             }
 
@@ -63,7 +66,7 @@ public class HitAndBlow extends AbstractGame implements Game {
         }
 
         if(tryCount.get() >= maxAttemps  && hits != numDigits){
-            System.out.println("You've reached the maximum number of attempts. Game over.");
+            ConsoleUtil.print("You've reached the maximum number of attempts. Game over.", true);
         }
     }
 
@@ -88,7 +91,7 @@ public class HitAndBlow extends AbstractGame implements Game {
     }
 
     private int calculateMaxTries(int n, int m){
-        int permutation = Calculate.calculatePermutation(n, m);
+        int permutation = CalculateUtil.calculatePermutation(n, m);
 
         return (int) Math.ceil(Math.log(permutation) / Math.log(2));
     }
@@ -98,7 +101,7 @@ public class HitAndBlow extends AbstractGame implements Game {
 
         inputErrorChecks.add(input -> {
             if(input.length() != numDigits) {
-                System.out.println("Invalid input. Please enter exactly " + numDigits + " digits.");
+                ConsoleUtil.print("Invalid input. Please enter exactly %d digits.".formatted(numDigits), true);
                 return false;
             }
             return true;
@@ -106,7 +109,7 @@ public class HitAndBlow extends AbstractGame implements Game {
 
         inputErrorChecks.add(input -> {
             if(IntStream.range(0, numDigits - 1).anyMatch(i -> input.indexOf(input.charAt(i)) != input.lastIndexOf(input.charAt(i)))) {
-                System.out.println("Invalid input. Please do not enter duplicate digits.");
+                ConsoleUtil.print("Invalid input. Please do not enter duplicate digits.", true);
                 return false;
             }
             return true;
@@ -131,6 +134,6 @@ public class HitAndBlow extends AbstractGame implements Game {
             }
         });
 
-        System.out.println("Hits: %d, Blows: %d".formatted(this.hits, this.blows));
+        ConsoleUtil.print("Hits: %d, Blows: %d".formatted(this.hits, this.blows), true);
     }
 }
