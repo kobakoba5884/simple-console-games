@@ -34,7 +34,6 @@ public class JankenGame extends AbstractGame {
                            
         // Player chooses a hand
         while (Objects.isNull(this.playerHand)) {
-
             String input = ConsoleUtil.readInput("Choose a hand (%s): ".formatted(typeOfHand), false);
             Optional<Hand> optPlayerHand = Hand.fromString(input);
 
@@ -52,9 +51,9 @@ public class JankenGame extends AbstractGame {
                 true);
 
         // Check the result
-        if (playerHand == cpuHand) {
+        if (this.playerHand == this.cpuHand) {
             ConsoleUtil.print("It's a draw!", true);
-        } else if (playerHand.winsAgainst(cpuHand)) {
+        } else if (this.playerHand.winsAgainst(this.cpuHand)) {
             ConsoleUtil.print("You win!", true);
         } else {
             ConsoleUtil.print("You lose!", true);
