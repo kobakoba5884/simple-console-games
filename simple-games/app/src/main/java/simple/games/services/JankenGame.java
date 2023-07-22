@@ -1,6 +1,10 @@
 package simple.games.services;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import simple.games.annotations.GameImpl;
 import simple.games.enums.Hand;
@@ -24,12 +28,20 @@ public class JankenGame extends AbstractGame {
 
     @Override
     public void play() {
+        String typeOfHand = Arrays.stream(Hand.values())
+                           .map(Hand::getHandValue)
+                           .collect(Collectors.joining("/"));
+                           
         // Player chooses a hand
-        while (this.playerHand == null) {
-            String input = ConsoleUtil.readInput("Choose a hand (Rock/Scissors/Paper): ", false);
-            this.playerHand = Hand.fromString(input);
-            if (this.playerHand == null) {
-                ConsoleUtil.print("Invalid input. Please enter Rock, Scissors, or Paper.", true);
+        while (Objects.isNull(this.playerHand)) {
+
+            String input = ConsoleUtil.readInput("Choose a hand (%s): ".formatted(typeOfHand), false);
+            Optional<Hand> optPlayerHand = Hand.fromString(input);
+
+            if (optPlayerHand.isPresent()) {
+                this.playerHand = optPlayerHand.get();
+            } else {
+                ConsoleUtil.print("Invalid input. Please enter (%s).".formatted(typeOfHand), true);
             }
         }
 

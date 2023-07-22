@@ -1,6 +1,7 @@
 package simple.games.enums;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Hand {
     ROCK("Rock", "Scissors"),
@@ -23,10 +24,9 @@ public enum Hand {
         return this.winsAgainst.equals(other.getHandValue());
     }
 
-    public static Hand fromString(String input) {
+    public static Optional<Hand> fromString(String input) {
         return Arrays.stream(Hand.values())
                 .filter(hand -> hand.getHandValue().equalsIgnoreCase(input))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }
