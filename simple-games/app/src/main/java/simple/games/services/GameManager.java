@@ -32,7 +32,7 @@ public class GameManager {
         YesNoResponse response;
 
         do {
-            this.currentGame = this.chooseGame();
+            this.currentGame = this.chooseGames();
             playAndRepeat();
 
             response = ConsoleUtil.requireYesNoResponse("Would you like to play a different game?");
@@ -53,7 +53,7 @@ public class GameManager {
         } while (response == YesNoResponse.YES);
     }
 
-    private Game chooseGame() {
+    private Game chooseGames() {
         ConsoleUtil.print("Available games:", true);
 
         IntStream.range(0, this.games.size())
