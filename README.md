@@ -20,7 +20,6 @@ This project uses the following technologies:
 The application logic is divided into multiple services, models, enums, and utilities to maintain a clean architecture.
 
 ```
-min@minmin:~/workspace/java/simple-games$ tree ./ -I '.git|.vscode|bin|build'
 ./
 ├── README.md
 ├── app
