@@ -8,12 +8,16 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import simple.games.annotations.GameImpl;
 import simple.games.utils.CalculateUtil;
 import simple.games.utils.ConsoleUtil;
 import simple.games.utils.ValidatorUtil;
 
+@Data
 @GameImpl
+@EqualsAndHashCode(callSuper=true)
 public class HitAndBlow extends AbstractGame {
     private final static int MAX_DIGIT = 10;
     private final static int MIN_DIGIT = 1;

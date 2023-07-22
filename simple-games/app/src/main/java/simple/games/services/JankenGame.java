@@ -6,11 +6,15 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import simple.games.annotations.GameImpl;
 import simple.games.enums.Hand;
 import simple.games.utils.ConsoleUtil;
 
+@Data
 @GameImpl
+@EqualsAndHashCode(callSuper = true)
 public class JankenGame extends AbstractGame {
     private Hand playerHand;
     private Hand cpuHand;
@@ -29,9 +33,9 @@ public class JankenGame extends AbstractGame {
     @Override
     public void play() {
         String typeOfHand = Arrays.stream(Hand.values())
-                           .map(Hand::getHandValue)
-                           .collect(Collectors.joining("/"));
-                           
+                .map(Hand::getHandValue)
+                .collect(Collectors.joining("/"));
+
         // Player chooses a hand
         while (Objects.isNull(this.playerHand)) {
             String input = ConsoleUtil.readInput("Choose a hand (%s): ".formatted(typeOfHand), false);
