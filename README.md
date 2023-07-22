@@ -20,52 +20,45 @@ This project uses the following technologies:
 The application logic is divided into multiple services, models, enums, and utilities to maintain a clean architecture.
 
 ```
-.
+min@minmin:~/workspace/java/simple-games$ tree ./ -I '.git|.vscode|bin|build'
+./
+├── README.md
+├── app
+│   ├── build.gradle
+│   └── src
+│       └── main
+│           └── java
+│               └── simple
+│                   └── games
+│                       ├── App.java
+│                       ├── annotations
+│                       │   └── GameImpl.java
+│                       ├── enums
+│                       │   ├── Hand.java
+│                       │   └── YesNoResponse.java
+│                       ├── models
+│                       │   └── User.java
+│                       ├── services
+│                       │   ├── AbstractGame.java
+│                       │   ├── Game.java
+│                       │   ├── GameManager.java
+│                       │   ├── HitAndBlow.java
+│                       │   └── JankenGame.java
+│                       └── utils
+│                           ├── CalculateUtil.java
+│                           ├── ConsoleUtil.java
+│                           └── ValidatorUtil.java
 ├── clean-in-wsl.sh <------------------------------------------------------ to clean enviroment in wsl
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradle.properties
+├── gradlew <------------------------------------------------------ I think Gradle can still run this.
+├── gradlew.bat
+├── settings.gradle
 ├── setup-in-wsl.sh <------------------------------------------------------ to setup enviroment in wsl (java, gradle ...)
-├── shared.sh
-└── simple-games
-    ├── README.md
-    ├── app
-    │   ├── build.gradle
-    │   └── src
-    │       ├── main
-    │       │   ├── java
-    │       │   │   └── simple
-    │       │   │       └── games
-    │       │   │           ├── App.java
-    │       │   │           ├── annotations
-    │       │   │           │   └── GameImpl.java
-    │       │   │           ├── enums
-    │       │   │           │   ├── Hand.java
-    │       │   │           │   └── YesNoResponse.java
-    │       │   │           ├── errors
-    │       │   │           ├── models
-    │       │   │           │   └── User.java
-    │       │   │           ├── services
-    │       │   │           │   ├── AbstractGame.java
-    │       │   │           │   ├── Game.java
-    │       │   │           │   ├── GameManager.java
-    │       │   │           │   ├── HitAndBlow.java
-    │       │   │           │   └── JankenGame.java
-    │       │   │           └── utils
-    │       │   │               ├── CalculateUtil.java
-    │       │   │               ├── ConsoleUtil.java
-    │       │   │               └── ValidatorUtil.java
-    │       │   └── resources
-    │       └── test
-    │           ├── java
-    │           │   └── simple
-    │           │       └── games
-    │           └── resources
-    ├── gradle
-    │   └── wrapper
-    │       ├── gradle-wrapper.jar
-    │       └── gradle-wrapper.properties
-    ├── gradle.properties
-    ├── gradlew <------------------------------------------------------ I think Gradle can still run this.
-    ├── gradlew.bat
-    └── settings.gradle
+└── shared.sh
 ```
 
 ## How to Run
@@ -74,8 +67,6 @@ To run this application, make sure you have Java 17 and Gradle 7.3 installed on 
 
 ```
     ./setup-in-wsl.sh
-
-    cd ./simple-games
 
     gradle clean build
 
