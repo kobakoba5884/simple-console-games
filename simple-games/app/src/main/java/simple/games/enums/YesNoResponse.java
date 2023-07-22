@@ -13,14 +13,13 @@ public enum YesNoResponse {
         this.value = value;
     }
 
-    @Override
-    public String toString() {
+    public String getValue() {
         return this.value;
     }
 
     public static Optional<YesNoResponse> fromString(String value) {
         return Arrays.stream(YesNoResponse.values())
-                .filter(response -> response.value.equalsIgnoreCase(value))
+                .filter(response -> response.getValue().equalsIgnoreCase(value))
                 .findFirst();
     }
 }

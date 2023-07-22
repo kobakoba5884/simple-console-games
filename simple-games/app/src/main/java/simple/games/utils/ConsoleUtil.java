@@ -38,13 +38,13 @@ public class ConsoleUtil {
         String userInput;
         do {
             ConsoleUtil.print(
-                    "%s (%s/%s)".formatted(question, YesNoResponse.YES.toString(), YesNoResponse.NO.toString()), true);
+                    "%s (%s/%s)".formatted(question, YesNoResponse.YES.getValue(), YesNoResponse.NO.getValue()), true);
             userInput = ConsoleUtil.readInput("Your choice: ", false);
 
             if (!ValidatorUtil.isValidYesNoResponse(userInput)) {
                 ConsoleUtil.print(
-                        "Invalid response. Please enter '%s' or '%s'.".formatted(YesNoResponse.YES.toString(),
-                                YesNoResponse.NO.toString()),
+                        "Invalid response. Please enter '%s' or '%s'.".formatted(YesNoResponse.YES.getValue(),
+                                YesNoResponse.NO.getValue()),
                         true);
             }
         } while (!ValidatorUtil.isValidYesNoResponse(userInput));
