@@ -1,8 +1,12 @@
 # Simple Console Games 🎮
 
 This is a simple console-based collection of games that I built using Java 17 and Gradle 7.3.
+
 I tried creating this as part of my Java studies. 
+
 Honestly, there's no need to make it a public repository, but I guess it's for keepsake.
+
+I think it might be useful for new employee training or something similar.
 
 ## Project Structure
 
