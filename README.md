@@ -1,12 +1,8 @@
 # Simple Console Games 🎮
 
-This is a super fun console-based collection of games that I built using Java 17 and Gradle 7.3. The project is a bit of an adventure for me as I'm exploring how to create engaging games mainly using the standard libraries in Java.
-
-## What's up with Simple Console Games?
-
-As someone who is still in the early stages of my programming journey, I wanted to really understand the core of Java and its standard libraries. So, I thought, why not learn by doing something fun - hence, Simple Games was born!
-
-The games here, like "Rock, Paper, Scissors" (Janken) and "Hit and Blow", are simple, but they've helped me understand different programming concepts.
+This is a simple fun console-based collection of games that I built using Java 17 and Gradle 7.3.
+I tried creating this as part of my Java studies. 
+Honestly, there's no need to make it a public repository, but I guess it's for keepsake.
 
 ## Project Structure
 
